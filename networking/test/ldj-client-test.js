@@ -12,7 +12,7 @@ describe('LDJClient', () => {
         client = new LDJClient(stream);
     });
 
-    if('should emit a message event from a single data event', done => {
+    it('should emit a message event from a single data event', done => {
         client.on('message', message => {
             assert.deepEqual(message, {foo: 'bar'});
             done();
@@ -20,7 +20,7 @@ describe('LDJClient', () => {
         stream.emit('data', '{"foo":"bar"}\n');
     });
   
-    if('should emit a message event from split data events', done => {
+    it('should emit a message event from split data events', done => {
         client.on('message', message => {
             assert.deepEqual(message, {foo:'bar'});
             done();
@@ -30,7 +30,7 @@ describe('LDJClient', () => {
     });
 });
 
-// var assert = require('assert');
+
 // describe('LDJClient', () => {
 // //   describe('#indexOf()', function() {
 // //     it('should return -1 when the value is not present', function() {
