@@ -1,11 +1,12 @@
 'use strict';
 const path = require('path');
+const webpack = require('webpack');
 const distDir = path.resolve(__dirname, 'dist');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './entry.js',
+    entry: './app/index.ts',
     output: {
         filename: 'bundle.js',
         path: distDir,
@@ -17,10 +18,17 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Better Book Bundle Builder'
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ],
     module: {
-        rules:[{
+        rules:[ {
+            test:/\.ts$/,
+            loader:'ts-loader'
+        }, {
             test: /\.css$/,
             use: ['style-loader', 'css-loader']
         }, {
