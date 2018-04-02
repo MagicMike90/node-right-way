@@ -68,8 +68,6 @@ passport.deserializeUser((user, done) => done(null, user));
 app.use(passport.initialize());
 app.use(passport.session());
 
-console.log(nconf.get('auth:facebook:appID'));
-console.log(nconf.get('auth:facebook:appSecret'));
 const FacebookStrategy = require('passport-facebook').Strategy;
 passport.use(new FacebookStrategy({
   clientID: nconf.get('auth:facebook:appID'),
@@ -138,7 +136,10 @@ app.get('/auth/signout', (req, res) => {
   res.redirect('/');
 });
 
-
 app.get('/api/version', (req, res) => res.status(200).json(pkg.version));
+
+// Add local API routes.
+app.use('/api', require('./lib/book.js')(nconf.get('es')));
+app.use('/api', require('./lib/bundle.js')(nconf.get('es')));
 
 app.listen(servicePort, () => console.log('Ready.'));

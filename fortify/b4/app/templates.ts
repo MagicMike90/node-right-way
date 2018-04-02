@@ -14,7 +14,7 @@ export const main = Handlebars.compile(`
         </button>
         <a class="navbar-brand" href="#welcome">B4</a>
       </div>
-      <!-- Insert navbar here. -->
+
       {{#if session.auth}}
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav navbar-right">
@@ -35,27 +35,29 @@ export const welcome = Handlebars.compile(`
   <div class="jumbotron">
     <h1>Welcome!</h1>
     <p>B4 is an application for creating book bundles.</p>
+
     {{#if session.auth}}
     <p>View your <a href="#list-bundles">bundles</a>.</p>
     {{else}}
     <p>Sign in with any of these services to begin.</p>
-    <div class="row">
-      <div class="col-sm-6">
-        <a href="/auth/facebook" class="btn btn-block btn-social btn-facebook">
-          Sign in with Facebook
-          <span class="fa fa-facebook"></span>
-        </a>
-        <a href="/auth/twitter" class="btn btn-block btn-social btn-twitter">
-          Sign in with Twitter
-          <span class="fa fa-twitter"></span>
-        </a>
-        <a href="/auth/google" class="btn btn-block btn-social btn-google">
-          Sign in with Google
-          <span class="fa fa-google"></span>
-        </a>
-      </div>
+		<div class="row">
+		  <div class="col-sm-6">
+      	<a href="/auth/facebook" class="btn btn-block btn-social btn-facebook">
+      	  Sign in with Facebook
+      	  <span class="fa fa-facebook"></span>
+      	</a>
+      	<a href="/auth/twitter" class="btn btn-block btn-social btn-twitter">
+      	  Sign in with Twitter
+      	  <span class="fa fa-twitter"></span>
+      	</a>
+      	<a href="/auth/google" class="btn btn-block btn-social btn-google">
+      	  Sign in with Google
+      	  <span class="fa fa-google"></span>
+      	</a>
+			</div>
     </div>
     {{/if}}
+
   </div>
 `);
 
@@ -164,3 +166,63 @@ export const viewBundle = Handlebars.compile(`
   </div>
 `);
 
+export const listSearchResults = Handlebars.compile(`
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th class="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this}}
+      <tr>
+        <td>
+          {{this.title}}
+        </td>
+        <td>
+          <button class="btn add"
+            data-id="pg{{this.id}}" data-title="{{this.title}}">Add</button>
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+`);
+
+export const options = Handlebars.compile(`
+  {{#each this}}
+  <option value="{{this}}" />
+  {{/each}}
+`);
+
+export const viewBook = Handlebars.compile(`
+  <h2>{{book.title}}</h2>
+
+  <p>
+    <a href="http://www.gutenberg.org/ebooks/{{book.id}}">
+    http://www.gutenberg.org/ebooks/{{book.id}}</a>
+  </p>
+
+  <h3>Authors</h3>
+  {{#if book.authors.length}}
+    <ul>
+    {{#each book.authors}}
+      <li>{{this}}</li>
+    {{/each}}
+    </ul>
+  {{else}}
+    <p>None listed.</p>
+  {{/if}}
+
+  <h3>Subjects</h3>
+  {{#if book.subjects.length}}
+    <ul>
+    {{#each book.subjects}}
+      <li>{{this}}</li>
+    {{/each}}
+    </ul>
+  {{else}}
+    <p>None listed.</p>
+  {{/if}}
+`);
