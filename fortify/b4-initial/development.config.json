@@ -1,0 +1,23 @@
+{
+  "serviceUrl": "http://b4.example.com:60900",
+  "auth": {
+    "facebook": {
+      "appID": "<your App ID>",
+      "appSecret": "<your App Secret>"
+    },
+    "twitter": {
+      "consumerKey": "sAMOAKEcvlYq7ACDTn9bdkCr9",
+      "consumerSecret": "UNr0ZWXXTT8dbGZifoQTtUe2RsabTqUBtiWdoJx9501jI7CRAC"
+    },
+    "google": {
+      "clientID": "541942102530-2vafb5407h3io3sihetrj71odem6om01.apps.googleusercontent.com",
+      "clientSecret": "4NUROHTp0Vo_0bW-oKG9jjPA"
+    }
+  },
+  "es": {
+    "host": "localhost",
+    "port": 9200,
+    "books_index": "books",
+    "bundles_index": "b4"
+  }
+}
